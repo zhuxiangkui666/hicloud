@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.aiidc.hicloud.demo.dao.mapper.TUserMapper">
+
+	<select id="selectPageVo" resultType="cn.com.aiidc.hicloud.demo.vo.user.UserVo" useCache="false">
+		SELECT id, name, money FROM t_user
+		<where>
+			<if test="name != null and name != ''">
+				AND name like CONCAT('%',#{name},'%')
+			</if>
+		</where>
+		
+		
+	</select>
+	
+	<select id="selectTotal" resultType="long" useCache="false">
+		SELECT COUNT(1) AS total FROM t_user
+		<where>
+			<if test="name != null and name != ''">
+				AND name like CONCAT('%',#{name},'%')
+			</if>
+		</where>
+		
+	</select>
+	
+
+</mapper>

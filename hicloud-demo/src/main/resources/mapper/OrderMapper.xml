@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.aiidc.hicloud.demo.dao.mapper.TOrderMapper">
+
+	<select id="selectPageVo" resultType="cn.com.aiidc.hicloud.demo.vo.order.OrderVo" useCache="false">
+		SELECT o.id AS id, o.user_id AS user_id, o.goods AS goods, o.money AS money, o.create_time AS create_time, o.status AS status, u.name AS username FROM t_order o 
+		LEFT JOIN t_user u ON o.user_id = u.id 
+		<where>
+			u.name <![CDATA[ <> ]]> '' 
+			<if test="vo.username != null and vo.username != ''">
+				AND u.name like CONCAT('%',#{vo.username},'%')
+			</if>
+			<if test="vo.money != null and vo.money != ''">
+				AND o.money = #{vo.money}
+			</if>
+		</where>
+		
+	</select>
+	
+	<select id="selectTotal" resultType="long" useCache="false">
+		SELECT COUNT(1) AS total FROM t_order o 
+		LEFT JOIN t_user u ON o.user_id = u.id 
+		<where>
+			u.name <![CDATA[ <> ]]> ''  
+			<if test="vo.username != null and vo.username != ''">
+				AND u.name like CONCAT('%',#{vo.username},'%')
+			</if>
+			<if test="vo.money != null and vo.money != ''">
+				AND o.money = #{vo.money}
+			</if>
+		</where>
+		
+	</select>
+	
+
+</mapper>
