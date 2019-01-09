@@ -20,6 +20,8 @@ spring cloud Finchley.SR2,集成Mybatis-plus和shardingSphere,服务注册与发
 
 8.postman发送以下post请求：Content-Type=application/json
 
+http://127.0.0.1:6001/hicloud-demo/order/create
+
 {
 	"accesstoken":"accesstoken",
 	"data":{
